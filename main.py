@@ -45,6 +45,16 @@ class VCN(commands.Cog):
         else:
             await ctx.send("on:offのどちらかのみを入力してください")
 
+    @commands.command()
+    async def role(self, ctx):
+        try:
+            discord.utils.get(ctx.guild.roles, name="vcn").name
+            await ctx.send("既に専用roleが存在します")
+        except AttributeError:
+            await ctx.guild.create_role(name="vcn")
+            await ctx.send("専用roleを作成しました")
+
+
 
 def setup(bot):
     bot.add_cog(VCN(bot))
