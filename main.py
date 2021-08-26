@@ -1,8 +1,5 @@
-import asyncio
 from discord.ext import commands
 import discord
-
-import settings
 
 
 class VCN(commands.Cog):
@@ -33,7 +30,7 @@ class VCN(commands.Cog):
                         await channel.send(f"*{member.name}*さんがVCに参加しました")
 
     @commands.command()
-    async def alert(self, ctx, set):
+    async def alert(self, ctx, _set):
         if set in ("on", "off"):
             role = discord.utils.get(ctx.guild.roles, name="vcn")
             if set == "on":
@@ -53,7 +50,6 @@ class VCN(commands.Cog):
         except AttributeError:
             await ctx.guild.create_role(name="vcn")
             await ctx.send("専用roleを作成しました")
-
 
 
 def setup(bot):
