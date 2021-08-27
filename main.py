@@ -17,17 +17,18 @@ class VCN(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        if after.channel is not None:  # VC参加時
-            if member.bot or len(after.channel.members) <= 1:  # 参加者がBot又はメンバーが1人以下の時は処理を中断
-                return
-            else:
-                role = discord.utils.get(member.guild.roles, name="vcn")
-                VCmembers = after.channel.members
-                VCmembers.remove(member)
-                for VCmember in VCmembers:
-                    if role in VCmember.roles:
-                        channel = await VCmember.create_dm()
-                        await channel.send(f"*{member.name}*さんがVCに参加しました")
+        if after.channel != before.channel:
+            if after.channel is not None:  # VC参加時
+                if member.bot or len(after.channel.members) <= 1:  # 参加者がBot又はメンバーが1人以下の時は処理を中断
+                    return
+                else:
+                    role = discord.utils.get(member.guild.roles, name="vcn")
+                    VCmembers = after.channel.members
+                    VCmembers.remove(member)
+                    for VCmember in VCmembers:
+                        if role in VCmember.roles:
+                            channel = await VCmember.create_dm()
+                            await channel.send(f"*{member.name}*さんがVCに参加しました")
 
     @commands.command()
     async def alert(self, ctx, _set):
