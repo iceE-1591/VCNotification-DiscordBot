@@ -24,9 +24,9 @@ class VCN(commands.Cog):
                 role = discord.utils.get(member.guild.roles, name="vcn")
                 VCmembers = after.channel.members
                 VCmembers.remove(member)
-                for member in VCmembers:
-                    if role in member.roles:
-                        channel = await member.create_dm()
+                for VCmember in VCmembers:
+                    if role in VCmember.roles:
+                        channel = await VCmember.create_dm()
                         await channel.send(f"*{member.name}*さんがVCに参加しました")
 
     @commands.command()
