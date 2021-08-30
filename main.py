@@ -32,12 +32,12 @@ class VCN(commands.Cog):
 
     @commands.command()
     async def alert(self, ctx, _set):
-        if set in ("on", "off"):
+        if _set in ("on", "off"):
             role = discord.utils.get(ctx.guild.roles, name="vcn")
-            if set == "on":
+            if _set == "on":
                 await ctx.author.add_roles(role)
                 await ctx.send("VC通知をオンにしました")
-            elif set == "off":
+            elif _set == "off":
                 await ctx.author.remove_roles(role)
                 await ctx.send("VC通知をオフにしました")
         else:
